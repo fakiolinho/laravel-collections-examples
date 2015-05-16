@@ -7,11 +7,11 @@ Laravel Collections Examples to help you grasp at once Laravel collections goodi
 
 With method `make`:
   
-	$collection = collect([$man, $woman]);
+	$collection = Collection::make([$man, $woman]);
 
 With helper function `collect`:
 
-	$collection = Collection::make([$man, $woman]);
+	$collection = collect([$man, $woman]);
 	
 Result:
 	
@@ -22,10 +22,10 @@ Result:
 	
 ## Collapse a collection
 
-	$collection = [
+	$collection = collect([
 		['id' => 1, 'name' => 'John Doe'],
 		['id' => 2, 'name' => 'Jane Doe']
-	];
+	]);
 
 Execute:
 	
@@ -35,16 +35,16 @@ Result:
 
 	['id' => 2, 'name' => 'Jane Doe']
 	
-## Check if collections contains an item
+## Check if a collection contains an item
 
-	$collection = [
+	$collection = collect([
 		['id' => 1, 'name' => 'John Doe'],
 		['id' => 2, 'name' => 'Jane Doe']
-	];
+	]);
 
 Execute:
 	
-	$collections->contains(['id' => 1, 'name' => 'John Doe']);
+	$collection->contains(['id' => 1, 'name' => 'John Doe']);
 	
 Result:
 
@@ -52,8 +52,28 @@ Result:
 
 Execute:
 
-	$collections->contains(['id' => 111111, 'name' => 'John Doe']);
+	$collection->contains(['id' => 111111, 'name' => 'John Doe']);
 	
 Result:
 
 	false
+	
+## Find the differences between collections
+	
+	$collection1 = collect([
+		['id' => 1, 'name' => 'John Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+	$collection2 = collect([
+		['id' => 3, 'name' => 'Jack Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+Execute:
+
+	$collection1->diff($collection2);
+	
+Result:
+
+	
