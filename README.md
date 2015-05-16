@@ -8,3 +8,4 @@ Laravel Collections Examples to help you grasp at once Laravel collections goodi
     $collection = collect([$man, $woman]);
     
     $collection = Collection::make([$man, $woman]);
+
