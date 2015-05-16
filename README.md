@@ -104,3 +104,97 @@ Execute:
 Result:
 
 	['John Doe', 'Jane Doe']
+	
+# Run a filter over each of the items
+
+	$collection1 = collect([
+		['id' => 1, 'name' => 'John Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+Execute:
+
+	$collection2 = $collection1->filter(function($item){
+		return $item['id'] < 2;
+	});
+	
+Result:
+
+	$collection2 = [
+		['id' => 1, 'name' => 'John Doe']
+	]);
+	
+Note:
+
+This is the big difference with `each`. Here we can assign the result to a new collection since the filtered results are returned.
+
+# Filter items by the given key value pair
+
+	$collection1 = collect([
+		['id' => 1, 'name' => 'John Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+Execute:
+
+	$collection2 = $collection->where('id', 1);
+	
+Result:
+	
+	$collection2 = [
+		['id' => 1, 'name' => 'John Doe']
+	];
+	
+Execute:
+
+	$collection2 = $collection->where('id', '1', true);
+	
+Result:
+	
+	$collection2 = [];
+	
+Execute:
+
+	$collection2 = $collection->where('id', '1', false);
+	
+Result:
+	
+	$collection2 = [
+		['id' => 1, 'name' => 'John Doe']
+	];
+	
+Note:
+
+Be careful, there is a third parameter named `strict` which is equal to true so by default the method tries to find for identical values and not just equal. If this changes then the method tries to find equal values.
+
+# Filter items by the given key value pair using loose comparison
+
+
+	$collection1 = collect([
+		['id' => 1, 'name' => 'John Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+Execute:
+
+	$collection2 = $collection->whereLoose('id', 1);
+	
+Result:
+	
+	$collection2 = [
+		['id' => 1, 'name' => 'John Doe']
+	];
+	
+Execute:
+
+	$collection2 = $collection->whereLoose('id', '1');
+	
+Result:
+	
+	$collection2 = [
+		['id' => 1, 'name' => 'John Doe']
+	];
+	
+Note:
+
+It is exactly the same method as before but in this case it doesn't accept a third parameter and returns results by searching only for equal values.
