@@ -58,22 +58,49 @@ Result:
 
 	false
 	
-## Find the differences between collections
-	
+## Execute a callback over each collection's item	
 	$collection1 = collect([
 		['id' => 1, 'name' => 'John Doe'],
 		['id' => 2, 'name' => 'Jane Doe']
 	]);
 	
-	$collection2 = collect([
-		['id' => 3, 'name' => 'Jack Doe'],
+	$collection2 = collect();
+	
+Execute:
+
+	$collection1->each(function($item) use ($collection2) {
+		if($item['id'] < 2) $collection2[] = $item;
+	});
+	
+Result:
+
+	$collection2 = [
+		['id' => 1, 'name' => 'John Doe']
+	]);
+	
+Note:
+
+Be careful it is just an iterator and it does return the collection itself without applying any changes to its items.
+	
+# Fetch a nested element of the collection
+
+	$collection = collect([
+		['id' => 1, 'name' => 'John Doe'],
 		['id' => 2, 'name' => 'Jane Doe']
 	]);
 	
 Execute:
 
-	$collection1->diff($collection2);
+	$collection->fetch('id');
 	
 Result:
 
+	[1, 3]
 	
+Execute:
+
+	$collection->fetch('name');
+	
+Result:
+
+	['John Doe', 'Jane Doe']
