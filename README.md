@@ -198,3 +198,50 @@ Result:
 Note:
 
 It is exactly the same method as before but in this case it doesn't accept a third parameter and returns results by searching only for equal values.
+
+# Get a flattened array of the items in the collection
+
+	$collection = collect([
+		['id' => 1, 'name' => 'John Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+Execute:
+
+	$collection1 = $collection->flatten();
+	
+Result:
+	
+	$collection1 = [1, 'John Doe', 2, 'Jane Doe'];
+	
+# Flip the items in the collection
+
+	$collection = collect(['id' => 1, 'name' => 'John Doe']);
+	
+Execute:
+
+	$collection1 = $collection->flip();
+	
+Result:
+	
+	$collection1 = ['1' => 'id', 'John Doe' => 'name'];
+	
+# Remove an item from the collection by key
+	$collection = collect([
+		['id' => 1, 'name' => 'John Doe'],
+		['id' => 2, 'name' => 'Jane Doe']
+	]);
+	
+Execute:
+
+	$collection->forget(1);
+	
+Result:
+	
+	$collection = [
+		['id' => 1, 'name' => 'John Doe']
+	];
+	
+Note:
+
+Method `forget($key)` affects the collection without returning anything. So after we apply it we simply use the affected collection.
